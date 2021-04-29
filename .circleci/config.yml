@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  test:
+    macos:
+      xcode: 12.4.0
+    steps:
+      - run:
+          no_output_timeout: 30m
+          command: |
+            xcversion simulators --install="iOS 14.3 Simulator" --no-progress
+            xcrun simctl create 'iPhone 12 Pro Max (14.3)' com.apple.CoreSimulator.SimDeviceType.iPhone-12-Pro-Max com.apple.CoreSimulator.SimRuntime.iOS-14-3
+
+workflows:
+  wf:
+    jobs:
+      - test
